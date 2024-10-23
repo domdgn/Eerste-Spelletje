@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyFollow : MonoBehaviour
 {
     private Transform player;
-    public float followSpeed = 3.5f;
+    private float followSpeed = 7.5f;
     void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");

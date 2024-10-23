@@ -549,7 +549,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81060f94a9bd3984591ab1ba47938cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 3.5
+  maxSpeed: 7.5
+  acceleration: 5
+  rotationSpeed: 5
+  minDistanceToPlayer: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  usePhysicsMovement: 0
 --- !u!114 &609515335733249061
 MonoBehaviour:
   m_ObjectHideFlags: 0

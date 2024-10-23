@@ -9,6 +9,7 @@ TagManager:
   - MusicPlayer
   - ButtonManager
   - HealthKit
+  - RapidFire
   layers:
   - Default
   - TransparentFX

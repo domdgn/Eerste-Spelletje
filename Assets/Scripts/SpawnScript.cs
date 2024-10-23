@@ -48,7 +48,7 @@ public class SpawnScript : MonoBehaviour
             if (waveNumber == 1)
             {
                 waveTimer = 30;
-                maxEnemies = 4;
+                maxEnemies = 8;
                 spawnFreqMax = 10;
                 spawnFreqMin = 8;
                 StartCoroutine(spawnEnemyOnTimer());
@@ -56,15 +56,13 @@ public class SpawnScript : MonoBehaviour
             }
 
             waveNumber++;
-            waveTimer = 25; 
-            maxEnemies += 2; 
-            spawnFreqMin -= 2;
-            if (spawnFreqMin < 3)
+            waveTimer = 30; 
+            maxEnemies += 1; 
+            spawnFreqMin -= 1;
+            if (spawnFreqMin < 4)
             {
-                spawnFreqMin = 3;
+                spawnFreqMin = 4;
             }
-
-            //Debug.Log("Wave " + waveNumber + " starting in " + waveTimer + " seconds.");
             yield return new WaitForSecondsRealtime(waveTimer);
         }
     }

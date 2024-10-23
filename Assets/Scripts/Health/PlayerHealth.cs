@@ -50,14 +50,4 @@ public class PlayerHealth : MonoBehaviour
         isPlayerDead = true;
         Destroy(gameObject);
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("HealthKit") && currentHealth < 100)
-        {
-            Debug.Log("Health Pickup");
-            HealthPickup(20f);
-            Destroy(other.gameObject);
-        }
-    }
 }
