@@ -6,7 +6,7 @@ public class PlayerEffects : MonoBehaviour
 {
     [Header("Rapid Fire Rate")]         //LOOK WHAT I LEARNED
     [Tooltip("Adjusts fire rate when powered up")]
-    public float rapidRate = 0.8f;
+    public float rapidRateMultiplier = 2f;
     public bool isRapid = false;
 
     private PlayerFire playerFire;
@@ -17,7 +17,7 @@ public class PlayerEffects : MonoBehaviour
         isRapid = false;
         playerHealth = gameObject.GetComponent<PlayerHealth>();
         playerFire = gameObject.GetComponent<PlayerFire>();
-        playerFire.fireRate = playerFire.defaultFireRate;
+        playerFire.fireRateMultiplier = playerFire.defaultFireRateMultiplier;
     }
     void OnTriggerEnter(Collider other)
     {
@@ -39,10 +39,10 @@ public class PlayerEffects : MonoBehaviour
 
     IEnumerator RapidFireTimer()
     {
-        playerFire.fireRate = rapidRate/20;
+        playerFire.fireRateMultiplier = rapidRateMultiplier;
         isRapid = true;
         yield return new WaitForSecondsRealtime(5);
         isRapid = false;
-        playerFire.fireRate = playerFire.defaultFireRate;
+        playerFire.fireRateMultiplier = playerFire.defaultFireRateMultiplier;
     }
 }

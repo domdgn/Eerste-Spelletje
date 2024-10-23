@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class DevSpawnEnemies : MonoBehaviour
@@ -6,9 +7,12 @@ public class DevSpawnEnemies : MonoBehaviour
     public GameObject healthkitPrefab;
     private Camera mainCamera;
     public GameObject startText;
+    
 
     void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        
         mainCamera = Camera.main;
         startText.SetActive(true);
     }
@@ -38,14 +42,13 @@ public class DevSpawnEnemies : MonoBehaviour
         {
             // Instantiate the enemy at the hit point
             Instantiate(enemyPrefab, hit.point, Quaternion.identity);
+            print("Enemy spawned");
         }
     }
 
     void SpawnHealthKitAtCursor()
     {
-        // Get the cursor position in screen space
         Vector3 mousePos = Input.mousePosition;
-        // Convert the cursor position to world space
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
 
@@ -53,8 +56,8 @@ public class DevSpawnEnemies : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Instantiate the enemy at the hit point
             Instantiate(healthkitPrefab, hit.point + offset, Quaternion.identity);
+            print("Health Kit spawned");
         }
     }
 }

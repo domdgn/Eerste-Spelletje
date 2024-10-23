@@ -1,0 +1,11 @@
+after 100 kills
+- new enemy
+ABILITIES
+shield
+new guns
+-shotgun
+-AR 
+-smg
+explosion
+
+SHOP - flame balls

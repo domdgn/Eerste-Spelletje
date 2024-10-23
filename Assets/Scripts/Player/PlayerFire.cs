@@ -1,135 +1,40 @@
+using System.Security.Cryptography;
 using UnityEngine;
-using System.Collections;
 
 public class PlayerFire : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform firePoint;
+    public float fireRateMultiplier = 1f;
+    public float defaultFireRateMultiplier = 1f;
 
-    public float bulletSpeed = 20f;
+    public string currentWeapon;
 
-    public float bulletLifetime = 2.5f;
+    private PistolFire pistol;
 
-    public float fireRate = 0.15f;
-    public float defaultFireRate = 0.15f;
-
-    public bool fireOnPress = true;
-    public AudioClip shootSound;
-    public AudioSource audioSource;
-    public Vector2 pitchRange = new Vector2(0.8f, 1.2f);
-
-    private bool isFiring = false;
-    private float nextFireTime = 0f;
-    private Coroutine firingCoroutine;
-
-    void Start()
-    {
-        StopAllCoroutines();
-        isFiring = false;
-        nextFireTime = 0f;
-        firingCoroutine = null;
-    }
+    public GameObject pistolPrefab;
+    public GameObject shotgunPrefab;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            StartFiring();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            StopFiring();
-        }
-    }
-
-    private void StartFiring()
-    {
-        if (isFiring) return; // Prevent multiple coroutines
-
-        isFiring = true;
-
-        // Only fire immediately if allowed and enough time has passed
-        if (fireOnPress && Time.time >= nextFireTime)
-        {
-            FireBullet();
+            SpawnPistol();
         }
 
-        firingCoroutine = StartCoroutine(FireRoutine());
-    }
-
-    private void StopFiring()
-    {
-        isFiring = false;
-
-        if (firingCoroutine != null)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            StopCoroutine(firingCoroutine);
-            firingCoroutine = null;
+            SpawnShotgun();
         }
     }
 
-    private IEnumerator FireRoutine()
+    void SpawnPistol()
     {
-        while (isFiring)
-        {
-            // Wait until next fire time
-            while (Time.time < nextFireTime)
-            {
-                yield return null;
-            }
-
-            // Don't fire if just fired on press
-            if (!fireOnPress || Time.time >= nextFireTime + fireRate)
-            {
-                FireBullet();
-            }
-
-            // Use WaitForSeconds for the remaining time if any
-            float remainingTime = nextFireTime + fireRate - Time.time;
-            if (remainingTime > 0)
-            {
-                yield return new WaitForSeconds(remainingTime);
-            }
-        }
+        Instantiate(pistolPrefab, Vector3.zero, Quaternion.identity);
+        print("Pistol spawned");
     }
 
-    private void FireBullet()
+    void SpawnShotgun()
     {
-        if (!bulletPrefab || !firePoint) return;
-
-        // Update next fire time
-        nextFireTime = Time.time + fireRate;
-
-        // Create bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-        if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
-        {
-            rb.velocity = firePoint.forward * bulletSpeed;
-        }
-        else
-        {
-            Debug.LogWarning("Bullet prefab missing Rigidbody component!");
-        }
-
-        // Setup destruction
-        Destroy(bullet, bulletLifetime);
-
-        // Play sound
-        PlayShootSound();
-    }
-
-    private void PlayShootSound()
-    {
-        if (audioSource && shootSound)
-        {
-            audioSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
-            audioSource.PlayOneShot(shootSound);
-        }
-    }
-
-    private void OnDisable()
-    {
-        StopFiring();
+        Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
+        print("Shotgun spawned");
     }
 }

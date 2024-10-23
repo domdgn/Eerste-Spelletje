@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 
@@ -33,17 +34,27 @@ public class HealthSystem : MonoBehaviour
         {
             healthBar.SetHealth(currentHealth);
             GameObject audioObject = new GameObject("HurtSound");
-            AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
-            audioSourceTemp.clip = hurtSound;
-
-            audioSourceTemp.pitch = Random.Range(0.8f, 1.2f);
-
-            audioSourceTemp.Play();
+            audioObject.tag = "HurtSound";
+            PlayHurtSound();
             Destroy(audioObject, hurtSound.length);
         }
         if (currentHealth <= 0f)
         {
             Die();
+        }
+    }
+
+    void PlayHurtSound()
+    {
+        GameObject[] audioObjects = GameObject.FindGameObjectsWithTag("HurtSound");
+
+        if (audioObjects.Length <= 1)
+        {
+            GameObject audioObject = new GameObject("HurtSound");
+            AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
+            audioSourceTemp.clip = hurtSound;
+            audioSourceTemp.Play();
+            Destroy(audioObject, hurtSound.length);
         }
     }
 
@@ -53,8 +64,9 @@ public class HealthSystem : MonoBehaviour
         GameObject audioObject = new GameObject("DeathSound");
         AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
         audioSourceTemp.clip = deathSound;
+        audioSourceTemp.volume = audioSourceTemp.volume * 0.15f;
 
-        audioSourceTemp.pitch = Random.Range(0.8f, 1.2f);
+        audioSourceTemp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
 
         audioSourceTemp.Play();
         Destroy(audioObject, deathSound.length);

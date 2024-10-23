@@ -10,6 +10,9 @@ TagManager:
   - ButtonManager
   - HealthKit
   - RapidFire
+  - Weapon
+  - HurtSound
+  - WeaponUI
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - UI
   - Enemy
   - Ground
-  - 
+  - Weapons
   - 
   - 
   - 

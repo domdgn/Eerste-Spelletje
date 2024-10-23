@@ -21,11 +21,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-        GameObject audioObject = new GameObject("HurtSound");
-        AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
-        audioSourceTemp.clip = hurtSound;
-        audioSourceTemp.Play();
-        Destroy(audioObject, hurtSound.length);
+        PlayHurtSound();
 
         if (currentHealth <= 0f)
         {
@@ -45,7 +41,21 @@ public class PlayerHealth : MonoBehaviour
         Destroy(audioObject, healSound.length);
     }
 
-    void Die()
+    void PlayHurtSound()
+    {
+        GameObject[] audioObjects = GameObject.FindGameObjectsWithTag("HurtSound");
+
+        if (audioObjects.Length <= 1)
+        {
+            GameObject audioObject = new GameObject("HurtSound");
+            AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
+            audioSourceTemp.clip = hurtSound;
+            audioSourceTemp.Play();
+            Destroy(audioObject, hurtSound.length);
+        }
+    }
+
+    public void Die()
     {
         isPlayerDead = true;
         Destroy(gameObject);

@@ -22,5 +22,17 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damageAmount);
+            }
+
+            GameObject poof = Instantiate(particlePrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+            Destroy(gameObject);
+        }
+
     }
 }
