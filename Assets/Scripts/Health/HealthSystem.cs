@@ -35,6 +35,9 @@ public class HealthSystem : MonoBehaviour
             GameObject audioObject = new GameObject("HurtSound");
             AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
             audioSourceTemp.clip = hurtSound;
+
+            audioSourceTemp.pitch = Random.Range(0.8f, 1.2f);
+
             audioSourceTemp.Play();
             Destroy(audioObject, hurtSound.length);
         }
@@ -43,22 +46,18 @@ public class HealthSystem : MonoBehaviour
             Die();
         }
     }
+
     void Die()
     {
-        if (gameObject.CompareTag("Enemy"))
-        {
-            GameManager.instance.IncrementKillCount();
-            GameObject audioObject = new GameObject("DeathSound");
-            AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
-            audioSourceTemp.clip = deathSound;
-            audioSourceTemp.Play();
-            Destroy(audioObject, deathSound.length);
-        }
+        GameManager.instance.IncrementKillCount();
+        GameObject audioObject = new GameObject("DeathSound");
+        AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
+        audioSourceTemp.clip = deathSound;
 
-        if (gameObject.CompareTag("Player"))
-        {
-            isPlayerDead = true;
-        }
+        audioSourceTemp.pitch = Random.Range(0.8f, 1.2f);
+
+        audioSourceTemp.Play();
+        Destroy(audioObject, deathSound.length);
 
         Destroy(gameObject);
     }

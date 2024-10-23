@@ -8,15 +8,16 @@ TagManager:
   - Enemy
   - MusicPlayer
   - ButtonManager
+  - HealthKit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PowerUps
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Ground
   - 
   - 
   - 

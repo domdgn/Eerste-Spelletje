@@ -46,6 +46,19 @@ public class ButtonScript : MonoBehaviour
         Debug.Log(CursorMovement);
     }
 
+    public void OnExitButtonPress()
+    {
+        Application.Quit();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
+    }
+
     /* public void OnVolumeSliderValueChanged()
     {
         volumeSliderValue = volumeSlider.value;

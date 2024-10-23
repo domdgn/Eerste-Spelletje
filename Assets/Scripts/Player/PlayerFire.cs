@@ -11,24 +11,42 @@ public class PlayerFire : MonoBehaviour
     public AudioClip shootSound;
     public AudioSource audioSource;
 
+    private bool isFiring = false;
+
     void Update()
     {
-        // Check if LMB is pressed
         if (Input.GetMouseButtonDown(0))
         {
             FireBullet();
-            audioSource.PlayOneShot(shootSound);
+            isFiring = true;
+            StartCoroutine(BulletTimer());
+        } 
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isFiring = false;
+            StopCoroutine(BulletTimer());
         }
     }
 
     void FireBullet()
     {
-        // Instantiate the bullet at the fire point's position and rotation
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        // Add force to the bullet's Rigidbody component to make it move forward
+
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.PlayOneShot(shootSound);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.velocity = firePoint.forward * bulletSpeed;
 
         Destroy(bullet, bulletDestroyTime);
+    }
+
+    IEnumerator BulletTimer()
+    {
+        while (isFiring)
+        {
+            yield return new WaitForSeconds(0.25f);
+            FireBullet();
+        }
     }
 }

@@ -16,12 +16,6 @@ public class SpawnScript : MonoBehaviour
         StartCoroutine(waveMethod());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator spawnEnemyOnTimer()
     {
         while (true)
@@ -29,8 +23,13 @@ public class SpawnScript : MonoBehaviour
             int enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
             if (enemyCount < maxEnemies)
             {
-                Debug.Log("Enemy spawned");
-                Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+                //Debug.Log("Enemy spawned");
+                float randomX = Random.Range(-10.0f, 10.0f);
+                float randomZ = Random.Range(-10.0f, 10.0f);
+
+                Vector3 randomPosition = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+                Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
             }
             else
             {
@@ -65,7 +64,7 @@ public class SpawnScript : MonoBehaviour
                 spawnFreqMin = 3;
             }
 
-            Debug.Log("Wave " + waveNumber + " starting in " + waveTimer + " seconds.");
+            //Debug.Log("Wave " + waveNumber + " starting in " + waveTimer + " seconds.");
             yield return new WaitForSecondsRealtime(waveTimer);
         }
     }

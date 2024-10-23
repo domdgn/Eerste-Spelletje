@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class RestartSplashAppear : MonoBehaviour
 {
-    public HealthSystem playerHealthSystem;
+    public PlayerHealth playerHealthSystem;
     public GameObject restartSplash;
 
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerHealthSystem = playerObject.GetComponent<PlayerHealth>();
     }
     void Update()
     {
