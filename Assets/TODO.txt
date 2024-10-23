@@ -1,0 +1,21 @@
+enemies spawn randomly in a range from spawnpoint
+
+automatic firing on LMB hold PERHAPS wtih powerup?
+
+DONE -------fix the god damn health bar rotating weirdly above the player
+     -------(why did i make it worldspace surely its easier to just have it screenspace, and NOT parented to the rotation of the player)
+     -------and now for some reason once every 4 restarts, the enemies healthbars are sideways???
+
+random spawned health pickups +20 hp
+
+PLAYER STRAFING omg why did i not add this
+
+enemy navmesh + obstacles, instead of just LOOK AT PLAYER. GO TO PLAYER
+
+stop enemy spawning after death
+
+fix weird health bar offset when on 20 health (how is this even a thing)
+
+add an exit button
+
+remove enemy spawner (debug tool, press E to spawn enemy)
