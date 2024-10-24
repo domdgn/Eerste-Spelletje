@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    public bool hasShotgunUnlocked = false;
+
     public float fireRateMultiplier = 1f;
     public float defaultFireRateMultiplier = 1f;
 
@@ -20,7 +22,7 @@ public class PlayerFire : MonoBehaviour
             SpawnPistol();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasShotgunUnlocked)
         {
             SpawnShotgun();
         }

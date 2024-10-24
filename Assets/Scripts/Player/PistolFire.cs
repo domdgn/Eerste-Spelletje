@@ -26,12 +26,15 @@ public class PistolFire : MonoBehaviour
     private float nextFireTime = 0f;
     private Coroutine firingCoroutine;
 
+    private PlayerMovement playerMovement;
+
     private void OnEnable()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerFire = player.GetComponent<PlayerFire>();
+            playerMovement = player.GetComponent<PlayerMovement>();
             playerFire.currentWeapon = "Pistol";
 
             weaponHold = player.transform.Find("WeaponHold");
@@ -62,14 +65,16 @@ public class PistolFire : MonoBehaviour
 
     private void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (!playerMovement.isMovementBlocked)
         {
-            StartFiring();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            StopFiring();
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartFiring();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                StopFiring();
+            }
         }
     }
 

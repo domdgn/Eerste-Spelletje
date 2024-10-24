@@ -7,9 +7,17 @@ public class GameManager : MonoBehaviour
     public int enemiesKilled = 0; // Counter for enemies killed
     public TextMeshProUGUI killCountText; // Use TextMeshProUGUI for UI Text
 
-    void Start()
+    void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void IncrementKillCount()

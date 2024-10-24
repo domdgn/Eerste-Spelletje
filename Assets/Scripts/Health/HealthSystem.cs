@@ -11,13 +11,12 @@ public class HealthSystem : MonoBehaviour
     public bool isPlayerDead = false;
     private AudioSource audioSource;
     private HealthBar healthBar;
+    private bool isDead = false;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
-
-        // Get the HealthBar component from the child Canvas in the enemy prefab
         healthBar = GetComponentInChildren<HealthBar>();
         if (healthBar != null)
         {
@@ -27,9 +26,10 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        if (isDead) return;
+
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHealth);
@@ -38,8 +38,10 @@ public class HealthSystem : MonoBehaviour
             PlayHurtSound();
             Destroy(audioObject, hurtSound.length);
         }
-        if (currentHealth <= 0f)
+
+        if (currentHealth <= 0f && !isDead)
         {
+            isDead = true;
             Die();
         }
     }
@@ -47,10 +49,10 @@ public class HealthSystem : MonoBehaviour
     void PlayHurtSound()
     {
         GameObject[] audioObjects = GameObject.FindGameObjectsWithTag("HurtSound");
-
-        if (audioObjects.Length <= 1)
+        if (audioObjects.Length <= 3)
         {
             GameObject audioObject = new GameObject("HurtSound");
+            audioObject.tag = "HurtSound";
             AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
             audioSourceTemp.clip = hurtSound;
             audioSourceTemp.Play();
@@ -65,12 +67,9 @@ public class HealthSystem : MonoBehaviour
         AudioSource audioSourceTemp = audioObject.AddComponent<AudioSource>();
         audioSourceTemp.clip = deathSound;
         audioSourceTemp.volume = audioSourceTemp.volume * 0.15f;
-
         audioSourceTemp.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-
         audioSourceTemp.Play();
         Destroy(audioObject, deathSound.length);
-
         Destroy(gameObject);
     }
 }

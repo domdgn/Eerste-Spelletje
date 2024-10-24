@@ -75,6 +75,7 @@ public class ShotgunFire : MonoBehaviour
 
     private void Update()
     {
+        // BLOCK MOVEMENT PLS
         if (!canFire) return;
 
         if (Input.GetMouseButton(0))

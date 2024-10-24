@@ -1,5 +1,6 @@
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DevSpawnEnemies : MonoBehaviour
 {
@@ -27,6 +28,16 @@ public class DevSpawnEnemies : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             SpawnHealthKitAtCursor();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SceneManager.LoadScene("ShopMenu", LoadSceneMode.Additive);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SceneManager.UnloadSceneAsync("ShopMenu");
         }
     }
 

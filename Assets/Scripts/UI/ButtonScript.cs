@@ -51,13 +51,13 @@ public class ButtonScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void Update()
+    /* public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("StartScreen");
         }
-    }
+    } */
 
     /* public void OnVolumeSliderValueChanged()
     {
