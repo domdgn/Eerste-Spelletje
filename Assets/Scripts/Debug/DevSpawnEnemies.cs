@@ -29,16 +29,6 @@ public class DevSpawnEnemies : MonoBehaviour
         {
             SpawnHealthKitAtCursor();
         }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SceneManager.LoadScene("ShopMenu", LoadSceneMode.Additive);
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SceneManager.UnloadSceneAsync("ShopMenu");
-        }
     }
 
     void SpawnEnemyAtCursor()

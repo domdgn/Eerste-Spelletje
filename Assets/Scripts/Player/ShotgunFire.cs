@@ -33,12 +33,14 @@ public class ShotgunFire : MonoBehaviour
     public Vector2 pitchRange = new Vector2(0.8f, 1.2f);
 
     private bool canFire = true;
+    private PlayerMovement playerMovement;
 
     private void OnEnable()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+            playerMovement = player.GetComponent<PlayerMovement>();
             SetupWeapon(player);
         }
     }
@@ -77,6 +79,7 @@ public class ShotgunFire : MonoBehaviour
     {
         // BLOCK MOVEMENT PLS
         if (!canFire) return;
+        if (playerMovement.isMovementBlocked) return;
 
         if (Input.GetMouseButton(0))
         {

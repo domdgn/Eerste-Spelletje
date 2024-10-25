@@ -26,13 +26,10 @@ public class CameraFollow : MonoBehaviour
     {
         if (player != null)
         {
-            // Calculate the target position
             Vector3 targetPosition = player.position + offset;
 
-            // Smoothly move the camera towards the target position
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 5f);
 
-            // Keep the camera's rotation stable
             transform.rotation = Quaternion.Euler(90, 0, 0); // Ensures top-down view
         }
     }

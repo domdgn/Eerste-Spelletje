@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         UpdateKillCountUI();
     }
 
-    void UpdateKillCountUI()
+    public void UpdateKillCountUI()
     {
         if (killCountText != null)
         {

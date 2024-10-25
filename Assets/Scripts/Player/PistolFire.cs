@@ -65,16 +65,15 @@ public class PistolFire : MonoBehaviour
 
     private void Update()
     {
-        if (!playerMovement.isMovementBlocked)
+        if (playerMovement.isMovementBlocked) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartFiring();
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                StopFiring();
-            }
+            StartFiring();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            StopFiring();
         }
     }
 

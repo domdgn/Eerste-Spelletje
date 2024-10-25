@@ -428,6 +428,7 @@ MonoBehaviour:
   moveSpeed: 12.5
   stopDistance: 0.1
   padding: 1
+  isMovementBlocked: 0
 --- !u!114 &8744308225383250981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,3 +457,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRateMultiplier: 1
   defaultFireRateMultiplier: 1
+  currentWeapon: 
+  pistolPrefab: {fileID: 0}
+  shotgunPrefab: {fileID: 0}

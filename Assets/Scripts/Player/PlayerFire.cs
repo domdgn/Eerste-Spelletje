@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    public bool hasShotgunUnlocked = false;
+    private UnlockedWeapons unlockedWeapons;
 
     public float fireRateMultiplier = 1f;
     public float defaultFireRateMultiplier = 1f;
@@ -15,6 +15,11 @@ public class PlayerFire : MonoBehaviour
     public GameObject pistolPrefab;
     public GameObject shotgunPrefab;
 
+    void Awake()
+    {
+        GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
+        unlockedWeapons = gameManager.GetComponent<UnlockedWeapons>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -22,7 +27,7 @@ public class PlayerFire : MonoBehaviour
             SpawnPistol();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && hasShotgunUnlocked)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && unlockedWeapons.shotgunUnlocked)
         {
             SpawnShotgun();
         }
