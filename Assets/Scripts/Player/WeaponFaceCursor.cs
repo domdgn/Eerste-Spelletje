@@ -6,9 +6,16 @@ public class WeaponFaceCursor : MonoBehaviour
 {
     private Vector3 lookDirection = Vector3.zero;
     Camera mainCamera;
+    private PlayerMovement playerMovement;
 
     private void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
+ 
         mainCamera = Camera.main;
     }
     void faceCursor()
@@ -22,6 +29,7 @@ public class WeaponFaceCursor : MonoBehaviour
     }
     void Update()
     {
+        if (playerMovement.isMovementBlocked) return;
         faceCursor();
     }
 }

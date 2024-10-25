@@ -2,11 +2,11 @@ enemy navmesh + obstacles, instead of just LOOK AT PLAYER. GO TO PLAYER
 
 stop enemy spawning after death
 
-remove enemy spawner (debug tool, press E to spawn enemy)
+
 
 make enemies look nicer
 
-fix the full auto bug
+
 
 
 
@@ -15,20 +15,24 @@ fix the full auto bug
 
 DONE BELOWWWWW
 
-DONE -- fix weird health bar offset when on 20 health (how is this even a thing)
+remove enemy spawner (debug tool, press E to spawn enemy)
+
+fix the full auto bug
+
+fix weird health bar offset when on 20 health (how is this even a thing)
 **FIXING THIS BROKE THE HEALTH BAR ROTATION AGAIN?? I DIDNT EVEN TOCUH IT**
 
-DONE ------- PLAYER STRAFING omg why did i not add this
+PLAYER STRAFING omg why did i not add this
 
-DONE ------- enemies spawn randomly in a range from spawnpoint
+enemies spawn randomly in a range from spawnpoint
 
-DONE ------- automatic firing on LMB hold 
+automatic firing on LMB hold 
 PERHAPS wtih powerup?
 
 DONE AGAIN ------ NOT DONE ANMYYORE ----DONE ------- fix the god damn health bar rotating weirdly above the player
      ------- (why did i make it worldspace surely its easier to just have it screenspace, and NOT parented to the rotation of the player)
      ------- and now for some reason once every 4 restarts, the enemies healthbars are sideways???
 
-DONE ------- random spawned health pickups +20 hp
+random spawned health pickups +20 hp
 
-DONE ------- add an exit button
+add an exit button

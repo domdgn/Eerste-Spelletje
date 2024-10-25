@@ -13,6 +13,9 @@ TagManager:
   - Weapon
   - HurtSound
   - WeaponUI
+  - Bomb
+  - Pistol
+  - Shotgun
   layers:
   - Default
   - TransparentFX

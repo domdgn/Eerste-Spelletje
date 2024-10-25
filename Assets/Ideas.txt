@@ -3,9 +3,10 @@ after 100 kills
 ABILITIES
 shield
 new guns
--shotgun
+-shotgun 
 -AR 
 -smg
 explosion
 
-SHOP - flame balls
+SHOP 
+- flame balls

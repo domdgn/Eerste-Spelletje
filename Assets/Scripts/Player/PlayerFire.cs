@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    private UnlockedWeapons unlockedWeapons;
+
     public float fireRateMultiplier = 1f;
     public float defaultFireRateMultiplier = 1f;
 
@@ -13,6 +15,11 @@ public class PlayerFire : MonoBehaviour
     public GameObject pistolPrefab;
     public GameObject shotgunPrefab;
 
+    void Awake()
+    {
+        GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
+        unlockedWeapons = gameManager.GetComponent<UnlockedWeapons>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -20,7 +27,7 @@ public class PlayerFire : MonoBehaviour
             SpawnPistol();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && unlockedWeapons.shotgunUnlocked)
         {
             SpawnShotgun();
         }
@@ -28,13 +35,32 @@ public class PlayerFire : MonoBehaviour
 
     void SpawnPistol()
     {
-        Instantiate(pistolPrefab, Vector3.zero, Quaternion.identity);
-        print("Pistol spawned");
+        int pistolCount = GameObject.FindGameObjectsWithTag("Pistol").Length;
+        if (pistolCount < 1)
+        {
+            Instantiate(pistolPrefab, Vector3.zero, Quaternion.identity);
+            print("Pistol equipped");
+        }
+        else
+        {
+            print("Pistol already equipped");
+            return;
+        }
     }
 
     void SpawnShotgun()
     {
-        Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
-        print("Shotgun spawned");
+        int shotgunCount = GameObject.FindGameObjectsWithTag("Shotgun").Length;
+        if (shotgunCount < 1)
+        {
+            Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
+            print("Shotgun equipped");
+        }
+        else
+        {
+            print("Shotgun already equipped");
+            return;
+        }
+        
     }
 }

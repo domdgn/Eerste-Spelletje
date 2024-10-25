@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public float stopDistance = 0.1f;
     public float padding = 1f;
     private Vector3 lookDirection = Vector3.zero;
+    public bool isMovementBlocked = false;
     Camera mainCamera;
 
     void Start()
     {
+        isMovementBlocked = false;
         mainCamera = Camera.main;
     }
 
@@ -20,20 +22,23 @@ public class PlayerMovement : MonoBehaviour
         float movement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         float strafe = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
-        clampMovement();
-        faceCursor();
+        if (!isMovementBlocked)
+        {
+            clampMovement();
+            faceCursor();
 
-        if (ButtonScript.CursorMovement)
-        {
-            if (Vector3.Distance(transform.position, lookDirection + transform.position) > stopDistance)
+            if (ButtonScript.CursorMovement)
             {
-                transform.Translate(strafe, 0, movement);
+                if (Vector3.Distance(transform.position, lookDirection + transform.position) > stopDistance)
+                {
+                    transform.Translate(strafe, 0, movement);
+                }
             }
-        }
-        else
-        {
-            transform.Translate(Vector3.right * strafe, Space.World);
-            transform.Translate(Vector3.forward * movement, Space.World);
+            else
+            {
+                transform.Translate(Vector3.right * strafe, Space.World);
+                transform.Translate(Vector3.forward * movement, Space.World);
+            }
         }
     }
 
@@ -64,5 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Update the player's position
         transform.position = position;
+    }
+
+    public void BlockPlayerMovement(bool input)
+    {
+        isMovementBlocked = input;
     }
 }

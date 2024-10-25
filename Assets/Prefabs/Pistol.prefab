@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 2760091456812426506}
   m_Layer: 8
   m_Name: Pistol
-  m_TagString: Untagged
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64ab473e661ff94b9da2c9f4360ec5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponHold: {fileID: 0}
   bulletPrefab: {fileID: 1868745544625608951, guid: 490480a6b6a57c44ea4fbb958950a3fe, type: 3}
   firePoint: {fileID: 5585371651266751815}
   bulletSpeed: 20
