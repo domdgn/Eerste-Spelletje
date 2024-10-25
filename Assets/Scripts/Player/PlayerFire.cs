@@ -35,13 +35,32 @@ public class PlayerFire : MonoBehaviour
 
     void SpawnPistol()
     {
-        Instantiate(pistolPrefab, Vector3.zero, Quaternion.identity);
-        print("Pistol spawned");
+        int pistolCount = GameObject.FindGameObjectsWithTag("Pistol").Length;
+        if (pistolCount < 1)
+        {
+            Instantiate(pistolPrefab, Vector3.zero, Quaternion.identity);
+            print("Pistol equipped");
+        }
+        else
+        {
+            print("Pistol already equipped");
+            return;
+        }
     }
 
     void SpawnShotgun()
     {
-        Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
-        print("Shotgun spawned");
+        int shotgunCount = GameObject.FindGameObjectsWithTag("Shotgun").Length;
+        if (shotgunCount < 1)
+        {
+            Instantiate(shotgunPrefab, Vector3.zero, Quaternion.identity);
+            print("Shotgun equipped");
+        }
+        else
+        {
+            print("Shotgun already equipped");
+            return;
+        }
+        
     }
 }

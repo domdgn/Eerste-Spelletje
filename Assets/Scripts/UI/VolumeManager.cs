@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class VolumeManager : MonoBehaviour
 {
     public Slider volumeSlider;
-    public float volumeSliderValue = 1f;
+    [SerializeField] public float volumeSliderValue = 1f;
     private float startVolume = 1f;
 
     private void Start()

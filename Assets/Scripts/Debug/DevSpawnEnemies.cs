@@ -4,34 +4,64 @@ using UnityEngine.SceneManagement;
 
 public class DevSpawnEnemies : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject bombPrefab;
     public GameObject healthkitPrefab;
+    public GameObject spawns;
+    public GameObject debugText;
+    private UnlockedWeapons unlockedWeapons;
     private Camera mainCamera;
-    public GameObject startText;
-    
+
 
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
+        GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
+        unlockedWeapons = gameManager.GetComponent<UnlockedWeapons>();
         mainCamera = Camera.main;
-        startText.SetActive(true);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            SpawnEnemyAtCursor();
+            SpawnBombAtCursor();
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
             SpawnHealthKitAtCursor();
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            unlockedWeapons.shotgunUnlocked = !unlockedWeapons.shotgunUnlocked;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(spawns.activeInHierarchy)
+            {
+                spawns.SetActive(false);
+            }
+            else
+            {
+                spawns.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (debugText.activeInHierarchy)
+            {
+                debugText.SetActive(false);
+            }
+            else
+            {
+                debugText.SetActive(true);
+            }
+        }
     }
 
-    void SpawnEnemyAtCursor()
+    void SpawnBombAtCursor()
     {
         // Get the cursor position in screen space
         Vector3 mousePos = Input.mousePosition;
@@ -42,8 +72,8 @@ public class DevSpawnEnemies : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             // Instantiate the enemy at the hit point
-            Instantiate(enemyPrefab, hit.point, Quaternion.identity);
-            print("Enemy spawned");
+            Instantiate(bombPrefab, hit.point, Quaternion.identity);
+            print("Bomb spawned");
         }
     }
 

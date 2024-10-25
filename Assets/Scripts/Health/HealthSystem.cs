@@ -60,7 +60,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         GameManager.instance.IncrementKillCount();
         GameObject audioObject = new GameObject("DeathSound");
