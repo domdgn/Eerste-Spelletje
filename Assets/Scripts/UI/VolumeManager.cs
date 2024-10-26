@@ -17,6 +17,6 @@ public class VolumeManager : MonoBehaviour
     {
         volumeSliderValue = volumeSlider.value;
         AudioListener.volume = startVolume * volumeSliderValue; 
-        Debug.Log(AudioListener.volume);
+        //Debug.Log(AudioListener.volume);
     }
 }

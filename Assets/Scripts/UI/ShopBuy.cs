@@ -10,6 +10,8 @@ public class ShopBuy : MonoBehaviour
     private GameManager managerScript;
     public Button shotgunButton;
     public TextMeshProUGUI shotgunBuyText;
+    public Button bombButton;
+    public TextMeshProUGUI bombBuyText;
 
     void Awake()
     {
@@ -22,15 +24,34 @@ public class ShopBuy : MonoBehaviour
             shotgunButton.interactable = false;
             shotgunBuyText.text = ("Purchased");
         }
+
+        if (unlockedWeapons.bombUnlocked)
+        {
+            bombButton.interactable = false;
+            bombBuyText.text = ("Purchased");
+        }
     }
 
     public void BuyShotgun()
     {
-        if (managerScript.enemiesKilled >= 50)
+        if (managerScript.enemiesKilled >= 25)
         {
             shotgunButton.interactable = false;
             shotgunBuyText.text = ("Purchased");
             unlockedWeapons.shotgunUnlocked = true;
+            managerScript.enemiesKilled -= 25;
+            managerScript.UpdateKillCountUI();
+        }
+        else return;
+    }
+
+    public void BuyBomb()
+    {
+        if (managerScript.enemiesKilled >= 50)
+        {
+            bombButton.interactable = false;
+            bombBuyText.text = ("Purchased");
+            unlockedWeapons.bombUnlocked = true;
             managerScript.enemiesKilled -= 50;
             managerScript.UpdateKillCountUI();
         }

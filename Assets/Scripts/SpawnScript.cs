@@ -33,7 +33,7 @@ public class SpawnScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("Max enemies reached");
+                //Debug.Log("Max enemies reached");
             }
 
             spawnFreq = Random.Range(spawnFreqMin, spawnFreqMax);

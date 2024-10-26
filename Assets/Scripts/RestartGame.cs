@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class RestartGame : MonoBehaviour
 {
-    public GameManager Manager;
     public void Restart()
     {
-        Destroy(Manager);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        foreach (GameObject controller in GameObject.FindGameObjectsWithTag("GameController"))
+        {
+            Destroy(controller);
+        }
+
+        SceneManager.LoadScene("MainGame");
     }
 }

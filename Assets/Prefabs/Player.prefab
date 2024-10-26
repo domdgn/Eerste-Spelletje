@@ -458,5 +458,6 @@ MonoBehaviour:
   fireRateMultiplier: 1
   defaultFireRateMultiplier: 1
   currentWeapon: 
-  pistolPrefab: {fileID: 0}
-  shotgunPrefab: {fileID: 0}
+  pistolPrefab: {fileID: 2977373284842986425, guid: d4a35e7236bc61948bec1d634332cac4, type: 3}
+  shotgunPrefab: {fileID: 5337362521904422144, guid: a8f520f00c0951b418d4db8c327b0fb6, type: 3}
+  bombPrefab: {fileID: 9179999292193022520, guid: 709e741663d328d4f9abd0f5b5ad2886, type: 3}

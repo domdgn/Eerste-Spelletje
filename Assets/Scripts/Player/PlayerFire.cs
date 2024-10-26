@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
@@ -14,9 +16,16 @@ public class PlayerFire : MonoBehaviour
 
     public GameObject pistolPrefab;
     public GameObject shotgunPrefab;
+    public GameObject bombPrefab;
+
+    private Camera mainCamera;
+
+    private bool canPlaceBomb = true;
+    public float bombCooldownDuration = 5f;
 
     void Awake()
     {
+        mainCamera = Camera.main;
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
         unlockedWeapons = gameManager.GetComponent<UnlockedWeapons>();
     }
@@ -31,6 +40,12 @@ public class PlayerFire : MonoBehaviour
         {
             SpawnShotgun();
         }
+
+        if (Input.GetKeyDown(KeyCode.B) && unlockedWeapons.bombUnlocked)
+        {
+            PlaceBomb();
+        }
+
     }
 
     void SpawnPistol()
@@ -61,6 +76,33 @@ public class PlayerFire : MonoBehaviour
             print("Shotgun already equipped");
             return;
         }
-        
+    }
+
+    void PlaceBomb()
+    {
+        if (!canPlaceBomb || GameObject.FindGameObjectsWithTag("Bomb").Length >= 1)
+        {
+            return;
+        }
+
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 spawnPosition = hit.point + new Vector3(0, 0.5f, 0);
+            Instantiate(bombPrefab, spawnPosition, Quaternion.identity);
+            print("Bomb spawned");
+
+            StartCoroutine(BombCooldown());
+        }
+    }
+
+    IEnumerator BombCooldown()
+    {
+        canPlaceBomb = false;
+        yield return new WaitForSecondsRealtime(bombCooldownDuration);
+        canPlaceBomb = true;
     }
 }

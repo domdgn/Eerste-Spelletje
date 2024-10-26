@@ -21,11 +21,6 @@ public class DevSpawnEnemies : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SpawnBombAtCursor();
-        }
-
         if (Input.GetKeyDown(KeyCode.H))
         {
             SpawnHealthKitAtCursor();
@@ -33,7 +28,7 @@ public class DevSpawnEnemies : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            unlockedWeapons.shotgunUnlocked = !unlockedWeapons.shotgunUnlocked;
+            unlockedWeapons.UnlockAllWeapons();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -59,9 +54,21 @@ public class DevSpawnEnemies : MonoBehaviour
                 debugText.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (Time.timeScale != 0)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
     }
 
-    void SpawnBombAtCursor()
+    /* void SpawnBombAtCursor()
     {
         // Get the cursor position in screen space
         Vector3 mousePos = Input.mousePosition;
@@ -71,11 +78,11 @@ public class DevSpawnEnemies : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Instantiate the enemy at the hit point
+            // Instantiate the bomb at the hit point
             Instantiate(bombPrefab, hit.point, Quaternion.identity);
             print("Bomb spawned");
         }
-    }
+    } */
 
     void SpawnHealthKitAtCursor()
     {

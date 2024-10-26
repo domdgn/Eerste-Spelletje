@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class BombScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class BombScript : MonoBehaviour
     private MeshRenderer meshRenderer;
     private AudioSource audioSource;
 
+
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -21,13 +23,46 @@ public class BombScript : MonoBehaviour
 
     private IEnumerator BombTimer(float time)
     {
-        yield return new WaitForSeconds(time);
+        float elapsedTime = 0f;
+        Transform effectTransform = null;
+
+        foreach (Transform child in transform)
+        {
+            if (child.name == "Effect")
+            {
+                effectTransform = child;
+                break;
+            }
+        }
+
+        if (effectTransform != null)
+        {
+            Vector3 initialScale = Vector3.zero;
+            Vector3 finalScale = Vector3.one;
+
+            while (elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                effectTransform.localScale = Vector3.Lerp(initialScale, finalScale, elapsedTime / time);
+                yield return null;
+            }
+
+            effectTransform.localScale = finalScale; // Ensure it's set to final scale at the end
+        }
+
         StartCoroutine(DamageTimer(bombDamageTime));
     }
+
 
     private IEnumerator DamageTimer(float damageTime)
     {
         meshRenderer.enabled = false;
+
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);

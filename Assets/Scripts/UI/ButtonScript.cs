@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour
 {
     public static bool CursorMovement;
+    public bool wasLastSceneMainMenu;
     /* public Slider volumeSlider;
     public float volumeSliderValue = 1f;
     private float startVolume = 1f; */
@@ -32,12 +33,30 @@ public class ButtonScript : MonoBehaviour
 
     public void OnSettingsButtonPress()
     {
-        SceneManager.LoadScene("Settings");
+        if (SceneManager.GetActiveScene().name == "StartScreen")
+        {
+            wasLastSceneMainMenu = true;
+            SceneManager.LoadScene("Settings", LoadSceneMode.Single);
+        }
+        else
+        {
+            wasLastSceneMainMenu = false;
+            print("BROKEN OKAY IM SORRY");
+            return;
+            //SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+        }
     }
 
     public void OnBackButtonPress()
     {
-        SceneManager.LoadScene("StartScreen");
+        if (wasLastSceneMainMenu)
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
+        else
+        {
+            SceneManager.UnloadSceneAsync("Settings");
+        }
     }
 
     public void OnCursorMovementToggle()
@@ -51,18 +70,26 @@ public class ButtonScript : MonoBehaviour
         Application.Quit();
     }
 
-    /* public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("StartScreen");
-        }
-    } */
-
     /* public void OnVolumeSliderValueChanged()
     {
         volumeSliderValue = volumeSlider.value;
         AudioListener.volume = volumeSliderValue * startVolume;
         Debug.Log(AudioListener.volume);
     } */
+
+    public void ResumeGame()
+    {
+        SceneManager.UnloadSceneAsync("PauseScreen");
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("MainGame");
+        SceneManager.UnloadSceneAsync("PauseScreen");
+    }
 }

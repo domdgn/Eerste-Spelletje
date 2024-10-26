@@ -5,29 +5,36 @@ public class SceneController : MonoBehaviour
 {
     private bool isMainScenePaused = false;
     private PlayerMovement movement;
+    public string[] additiveScenes;
 
     private void Awake()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
-
         if (player != null)
         {
             movement = player.GetComponent<PlayerMovement>();
-            //Debug.Log("test test woop woop yayayay");
         }
     }
 
     void Update()
     {
-        // Check if the additive scene is loaded
-        if (SceneManager.GetSceneByName("ShopMenu").isLoaded && !isMainScenePaused)
+        bool additiveSceneLoaded = false;
+
+        foreach (string sceneName in additiveScenes)
+        {
+            if (SceneManager.GetSceneByName(sceneName).isLoaded)
+            {
+                additiveSceneLoaded = true;
+                break;
+            }
+        }
+
+        if (additiveSceneLoaded && !isMainScenePaused)
         {
             PauseMainScene();
         }
 
-        // Resume the main scene if the additive scene is unloaded
-        if (!SceneManager.GetSceneByName("ShopMenu").isLoaded && isMainScenePaused)
+        if (!additiveSceneLoaded && isMainScenePaused)
         {
             ResumeMainScene();
         }
@@ -35,14 +42,20 @@ public class SceneController : MonoBehaviour
 
     void PauseMainScene()
     {
-        movement.BlockPlayerMovement(true);
+        if (movement != null)
+        {
+            movement.BlockPlayerMovement(true);
+        }
         Time.timeScale = 0f; // Pause the main scene
         isMainScenePaused = true;
     }
 
     void ResumeMainScene()
     {
-        movement.BlockPlayerMovement(false);
+        if (movement != null)
+        {
+            movement.BlockPlayerMovement(false);
+        }
         Time.timeScale = 1f; // Resume the main scene
         isMainScenePaused = false;
     }

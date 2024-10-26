@@ -125,15 +125,11 @@ public class ShotgunFire : MonoBehaviour
             float angle = Random.Range(0f, 360f);
             float distance = Random.Range(0f, spreadAngle);
 
-            // Convert polar coordinates to Cartesian
-            float x = Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
+            //float x = Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
             float y = Mathf.Cos(angle * Mathf.Deg2Rad) * distance;
 
-            // Create spread rotation
-            Quaternion spreadRotation = firePoint.rotation *
-                Quaternion.Euler(x, y, 0);
+            Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(0, y, 0);
 
-            // Fire the bullet
             FireBullet(bulletPrefab, firePoint.position, spreadRotation);
         }
     }

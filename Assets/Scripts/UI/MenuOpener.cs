@@ -19,5 +19,19 @@ public class MenuOpener : MonoBehaviour
                 SceneManager.UnloadSceneAsync("ShopMenu");
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!SceneManager.GetSceneByName("MainGame").isLoaded) return;
+
+            if (!SceneManager.GetSceneByName("PauseScreen").isLoaded)
+            {
+                SceneManager.LoadScene("PauseScreen", LoadSceneMode.Additive);
+            }
+            else if (SceneManager.GetSceneByName("PauseScreen").isLoaded)
+            {
+                SceneManager.UnloadSceneAsync("PauseScreen");
+            }
+        }
     }
 }
