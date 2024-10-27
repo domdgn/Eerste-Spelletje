@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour
 {
     public static bool CursorMovement;
-    public bool wasLastSceneMainMenu;
+    //public bool wasLastSceneMainMenu;
     /* public Slider volumeSlider;
     public float volumeSliderValue = 1f;
     private float startVolume = 1f; */
@@ -35,12 +35,12 @@ public class ButtonScript : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "StartScreen")
         {
-            wasLastSceneMainMenu = true;
+            //wasLastSceneMainMenu = true;
             SceneManager.LoadScene("Settings", LoadSceneMode.Single);
         }
         else
         {
-            wasLastSceneMainMenu = false;
+            //wasLastSceneMainMenu = false;
             print("BROKEN OKAY IM SORRY");
             return;
             //SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
@@ -49,14 +49,7 @@ public class ButtonScript : MonoBehaviour
 
     public void OnBackButtonPress()
     {
-        if (wasLastSceneMainMenu)
-        {
-            SceneManager.LoadScene("StartScreen");
-        }
-        else
-        {
-            SceneManager.UnloadSceneAsync("Settings");
-        }
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void OnCursorMovementToggle()

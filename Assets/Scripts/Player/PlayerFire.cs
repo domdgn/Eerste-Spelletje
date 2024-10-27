@@ -41,7 +41,7 @@ public class PlayerFire : MonoBehaviour
             SpawnShotgun();
         }
 
-        if (Input.GetKeyDown(KeyCode.B) && unlockedWeapons.bombUnlocked)
+        if (Input.GetMouseButtonDown(2) && unlockedWeapons.bombUnlocked)
         {
             PlaceBomb();
         }
