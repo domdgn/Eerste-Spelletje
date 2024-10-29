@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 public class ButtonScript : MonoBehaviour
 {
     public static bool CursorMovement;

@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-
 public class BombScript : MonoBehaviour
 {
     [SerializeField] private float bombTime = 3f;

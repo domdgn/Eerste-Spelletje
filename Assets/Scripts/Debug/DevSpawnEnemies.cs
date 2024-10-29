@@ -1,6 +1,4 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DevSpawnEnemies : MonoBehaviour
 {

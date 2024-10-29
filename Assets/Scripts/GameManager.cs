@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro; // Import the TextMeshPro namespace
+using TMPro; 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int enemiesKilled = 0; // Counter for enemies killed
-    public TextMeshProUGUI killCountText; // Use TextMeshProUGUI for UI Text
+    public int enemiesKilled = 0;
+    public TextMeshProUGUI killCountText;
 
     void Awake()
     {
