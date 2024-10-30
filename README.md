@@ -1,5 +1,3 @@
-[![Visits Badge](https://badges.pufler.dev/visits/pujux/badge-it)](https://badges.pufler.dev)
-
 This is my first little standalone game project, built ==entirely in Unity with C#
 
 It's admittedly super generic, but it's helped me learn a lot along the way, and
